@@ -31,7 +31,7 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder is(int value) {
-        return is(java.lang.String.valueOf(value));
+        return is(String.valueOf(value));
     }
 
     public OperatorQueryBuilder is(double value) {
@@ -51,7 +51,7 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder isNot(int value) {
-        return isNot(java.lang.String.valueOf(value));
+        return isNot(String.valueOf(value));
     }
 
     public OperatorQueryBuilder isNot(double value) {
@@ -71,7 +71,7 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder greaterThan(int value) {
-        return greaterThan(java.lang.String.valueOf(value));
+        return greaterThan(String.valueOf(value));
     }
 
     public OperatorQueryBuilder greaterThan(double value) {
@@ -91,7 +91,7 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder lessThan(int value) {
-        return lessThan(java.lang.String.valueOf(value));
+        return lessThan(String.valueOf(value));
     }
 
     public OperatorQueryBuilder lessThan(double value) {
@@ -111,7 +111,7 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder greaterOrEqual(int value) {
-        return greaterOrEqual(java.lang.String.valueOf(value));
+        return greaterOrEqual(String.valueOf(value));
     }
 
     public OperatorQueryBuilder greaterOrEqual(double value) {
@@ -131,7 +131,7 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder lessOrEqual(int value) {
-        return lessOrEqual(java.lang.String.valueOf(value));
+        return lessOrEqual(String.valueOf(value));
     }
 
     public OperatorQueryBuilder lessOrEqual(double value) {
