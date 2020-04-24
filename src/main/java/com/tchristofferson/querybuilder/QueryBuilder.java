@@ -1,4 +1,4 @@
-package com.tchristofferson;
+package com.tchristofferson.querybuilder;
 
 public class QueryBuilder {
 

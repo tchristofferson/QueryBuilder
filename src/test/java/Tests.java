@@ -1,5 +1,5 @@
-import com.tchristofferson.DeleteQueryBuilder;
-import com.tchristofferson.SelectQueryBuilder;
+import com.tchristofferson.querybuilder.DeleteQueryBuilder;
+import com.tchristofferson.querybuilder.SelectQueryBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.Preconditions;
 

@@ -1,4 +1,4 @@
-package com.tchristofferson.options;
+package com.tchristofferson.querybuilder.options;
 
 public enum BooleanOptions {
 

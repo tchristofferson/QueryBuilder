@@ -1,7 +1,7 @@
-package com.tchristofferson;
+package com.tchristofferson.querybuilder;
 
-import com.tchristofferson.options.BooleanOptions;
-import com.tchristofferson.options.WhereOptions;
+import com.tchristofferson.querybuilder.options.BooleanOptions;
+import com.tchristofferson.querybuilder.options.WhereOptions;
 
 /**
  * Objects will be turned into Strings using toString() by default
