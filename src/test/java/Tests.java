@@ -1,4 +1,3 @@
-import com.tchristofferson.QueryBuilder;
 import com.tchristofferson.SelectQueryBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.Preconditions;
@@ -34,7 +33,15 @@ public class Tests {
                 .is("uuid")
                 .toString();
 
-        Preconditions.condition(sql.equals("SELECT * FROM players WHERE uuid == 'uuid';"), "equal test fails");
+        Preconditions.condition(sql.equals("SELECT * FROM players WHERE uuid = 'uuid';"), "equal test fails");
+
+        sql = new SelectQueryBuilder(false)
+                .from("players", "money")
+                .where("players", "uuid")
+                .is("money", "uuid")
+                .toString();
+
+        Preconditions.condition(sql.equals("SELECT * FROM players, money WHERE players.uuid = money.uuid;"), "equal test using columns fails");
     }
 
 }

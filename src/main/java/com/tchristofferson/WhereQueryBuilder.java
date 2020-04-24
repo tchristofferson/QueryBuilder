@@ -3,13 +3,10 @@ package com.tchristofferson;
 import com.tchristofferson.options.BooleanOptions;
 import com.tchristofferson.options.WhereOptions;
 
-import static com.tchristofferson.QueryBuilderUtil.getInString;
-
 /**
  * Objects will be turned into Strings using toString() by default
  */
 //FIXME: Repeating code
-    //TODO: Allow option for specifying a different table column
 public class WhereQueryBuilder extends QueryBuilder {
 
     protected WhereQueryBuilder(StringBuilder sqlBuilder, String column) {
@@ -17,9 +14,18 @@ public class WhereQueryBuilder extends QueryBuilder {
         sqlBuilder.append(" WHERE ").append(column);
     }
 
+    protected WhereQueryBuilder(StringBuilder sqlBuilder, String table, String column) {
+        super(sqlBuilder);
+        sqlBuilder.append(" WHERE ").append(table).append('.').append(column);
+    }
+
     protected WhereQueryBuilder(StringBuilder sqlBuilder, BooleanOptions option) {
         super(sqlBuilder);
         sqlBuilder.append(' ').append(option);
+    }
+
+    public OperatorQueryBuilder is(String table, String column) {
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.EQUAL, table + "." + column);
     }
 
     public OperatorQueryBuilder is(CharSequence value) {
@@ -146,15 +152,15 @@ public class WhereQueryBuilder extends QueryBuilder {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.IN, getInString(values));
     }
 
-    public OperatorQueryBuilder in(char ... values) {
+    public OperatorQueryBuilder in(Character ... values) {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.IN, getInString(values));
     }
 
-    public OperatorQueryBuilder in(int ... values) {
+    public OperatorQueryBuilder in(Integer ... values) {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.IN, getInString(values));
     }
 
-    public OperatorQueryBuilder in(double ... values) {
+    public OperatorQueryBuilder in(Double ... values) {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.IN, getInString(values));
     }
 
@@ -162,15 +168,15 @@ public class WhereQueryBuilder extends QueryBuilder {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_IN, getInString(values));
     }
 
-    public OperatorQueryBuilder notIn(char ... values) {
+    public OperatorQueryBuilder notIn(Character ... values) {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_IN, getInString(values));
     }
 
-    public OperatorQueryBuilder notIn(int ... values) {
+    public OperatorQueryBuilder notIn(Integer ... values) {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_IN, getInString(values));
     }
 
-    public OperatorQueryBuilder notIn(double ... values) {
+    public OperatorQueryBuilder notIn(Double ... values) {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_IN, getInString(values));
     }
 
@@ -213,5 +219,25 @@ public class WhereQueryBuilder extends QueryBuilder {
 
     public OperatorQueryBuilder notLike(String value) {
         return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_LIKE, value);
+    }
+
+    private String getInString(Object[] objects) {
+        StringBuilder builder = new StringBuilder("(");
+
+        for (int i = 0; i < objects.length; i++) {
+            Object object = objects[i];
+
+            if (object instanceof CharSequence || object instanceof Character) {
+                builder.append("'").append(object).append("'");
+            } else {
+                builder.append(object);
+            }
+
+            if (i != objects.length - 1) {
+                builder.append(", ");
+            }
+        }
+
+        return builder.append(")").toString();
     }
 }

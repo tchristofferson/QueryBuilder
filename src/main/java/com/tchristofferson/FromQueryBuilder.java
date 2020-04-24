@@ -10,4 +10,8 @@ public class FromQueryBuilder extends QueryBuilder {
     public WhereQueryBuilder where(String column) {
         return new WhereQueryBuilder(sqlBuilder, column);
     }
+
+    public WhereQueryBuilder where(String table, String column) {
+        return new WhereQueryBuilder(sqlBuilder, table, column);
+    }
 }

@@ -2,7 +2,7 @@ package com.tchristofferson.options;
 
 public enum WhereOptions {
 
-    EQUAL("=="),
+    EQUAL("="),
     NOT_EQUAL("<>"),
     GREATER(">"),
     LESS("<"),
