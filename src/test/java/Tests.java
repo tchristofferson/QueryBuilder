@@ -1,3 +1,4 @@
+import com.tchristofferson.DeleteQueryBuilder;
 import com.tchristofferson.SelectQueryBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.Preconditions;
@@ -44,6 +45,17 @@ public class Tests {
                 .toString();
 
         Preconditions.condition(sql.equals("SELECT * FROM players, money WHERE players.uuid = money.uuid;"), "equal test using columns fails");
+    }
+
+    @Test
+    public void testDelete() {
+        String sql = new DeleteQueryBuilder()
+                .from("players")
+                .where("uuid")
+                .is("uuid-goes-here")
+                .toString();
+
+        Preconditions.condition(sql.equals("DELETE FROM players WHERE uuid = 'uuid-goes-here';"), "Delete fails");
     }
 
 }
