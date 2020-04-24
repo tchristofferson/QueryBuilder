@@ -31,9 +31,11 @@ public class Tests {
                 .from("players")
                 .where("uuid")
                 .is("uuid")
+                .and("players", "uuid")
+                .is("uuid")
                 .toString();
 
-        Preconditions.condition(sql.equals("SELECT * FROM players WHERE uuid = 'uuid';"), "equal test fails");
+        Preconditions.condition(sql.equals("SELECT * FROM players WHERE uuid = 'uuid' AND players.uuid = 'uuid';"), "equal test fails");
 
         sql = new SelectQueryBuilder(false)
                 .from("players", "money")

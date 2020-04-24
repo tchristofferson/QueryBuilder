@@ -19,9 +19,9 @@ public class WhereQueryBuilder extends QueryBuilder {
         sqlBuilder.append(" WHERE ").append(table).append('.').append(column);
     }
 
-    protected WhereQueryBuilder(StringBuilder sqlBuilder, BooleanOptions option) {
+    protected WhereQueryBuilder(StringBuilder sqlBuilder, String column, BooleanOptions option) {
         super(sqlBuilder);
-        sqlBuilder.append(' ').append(option);
+        sqlBuilder.append(' ').append(option).append(' ').append(column);
     }
 
     public OperatorQueryBuilder is(String table, String column) {

@@ -11,10 +11,18 @@ public class OperatorQueryBuilder extends QueryBuilder {
     }
 
     public WhereQueryBuilder and(String column) {
-        return new WhereQueryBuilder(sqlBuilder, BooleanOptions.AND);
+        return new WhereQueryBuilder(sqlBuilder, column, BooleanOptions.AND);
+    }
+
+    public WhereQueryBuilder and(String table, String column) {
+        return and(table + "." + column);
     }
 
     public WhereQueryBuilder or(String column) {
-        return new WhereQueryBuilder(sqlBuilder, BooleanOptions.OR);
+        return new WhereQueryBuilder(sqlBuilder, column, BooleanOptions.OR);
+    }
+
+    public WhereQueryBuilder or(String table, String column) {
+        return or(table + "." + column);
     }
 }
