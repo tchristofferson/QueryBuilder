@@ -1,4 +1,5 @@
 import com.tchristofferson.querybuilder.DeleteQueryBuilder;
+import com.tchristofferson.querybuilder.InsertQueryBuilder;
 import com.tchristofferson.querybuilder.SelectQueryBuilder;
 import com.tchristofferson.querybuilder.UpdateQueryBuilder;
 import org.junit.Test;
@@ -70,5 +71,16 @@ public class Tests {
                 .toString();
 
         assertEquals("UPDATE players SET name = 'tchristofferson', uuid = 'uuid' WHERE uuid = 123;", sql);
+    }
+
+    @Test
+    public void testInsert() {
+        String sql = new InsertQueryBuilder("players")
+                .withColumns("uuid", "name")
+                .withValues("uuid", "tchristofferson")
+                .withValues("uuid2", "mchristofferson")
+                .toString();
+
+        assertEquals("INSERT INTO players (uuid, name) VALUES ('uuid', 'tchristofferson'), ('uuid2', 'mchristofferson');", sql);
     }
 }
