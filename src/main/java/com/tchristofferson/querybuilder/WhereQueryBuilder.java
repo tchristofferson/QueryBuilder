@@ -37,15 +37,15 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder is(int value) {
-        return is(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder is(double value) {
-        return is(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder is(boolean value) {
-        return is(String.valueOf(value).toUpperCase());
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder isNot(CharSequence value) {
@@ -57,15 +57,15 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder isNot(int value) {
-        return isNot(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder isNot(double value) {
-        return isNot(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder isNot(boolean value) {
-        return isNot(String.valueOf(value).toUpperCase());
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_EQUAL, String.valueOf(value).toUpperCase());
     }
 
     public OperatorQueryBuilder greaterThan(CharSequence value) {
@@ -77,15 +77,15 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder greaterThan(int value) {
-        return greaterThan(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.GREATER, String.valueOf(value));
     }
 
     public OperatorQueryBuilder greaterThan(double value) {
-        return greaterThan(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.GREATER, String.valueOf(value));
     }
 
     public OperatorQueryBuilder greaterThan(boolean value) {
-        return greaterThan(String.valueOf(value).toUpperCase());
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.GREATER, String.valueOf(value).toUpperCase());
     }
 
     public OperatorQueryBuilder lessThan(CharSequence value) {
@@ -97,15 +97,15 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder lessThan(int value) {
-        return lessThan(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LESS, String.valueOf(value));
     }
 
     public OperatorQueryBuilder lessThan(double value) {
-        return lessThan(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LESS, String.valueOf(value));
     }
 
     public OperatorQueryBuilder lessThan(boolean value) {
-        return lessThan(String.valueOf(value).toUpperCase());
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LESS, String.valueOf(value).toUpperCase());
     }
 
     public OperatorQueryBuilder greaterOrEqual(CharSequence value) {
@@ -117,15 +117,15 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder greaterOrEqual(int value) {
-        return greaterOrEqual(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.GREATER_EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder greaterOrEqual(double value) {
-        return greaterOrEqual(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.GREATER_EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder greaterOrEqual(boolean value) {
-        return greaterOrEqual(String.valueOf(value).toUpperCase());
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.GREATER_EQUAL, String.valueOf(value).toUpperCase());
     }
 
     public OperatorQueryBuilder lessOrEqual(CharSequence value) {
@@ -137,15 +137,15 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder lessOrEqual(int value) {
-        return lessOrEqual(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LESS_EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder lessOrEqual(double value) {
-        return lessOrEqual(String.valueOf(value));
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LESS_EQUAL, String.valueOf(value));
     }
 
     public OperatorQueryBuilder lessOrEqual(boolean value) {
-        return lessOrEqual(String.valueOf(value).toUpperCase());
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LESS_EQUAL, String.valueOf(value).toUpperCase());
     }
 
     public OperatorQueryBuilder in(CharSequence ... values) {

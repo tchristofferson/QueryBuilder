@@ -1,29 +1,31 @@
 import com.tchristofferson.querybuilder.DeleteQueryBuilder;
 import com.tchristofferson.querybuilder.SelectQueryBuilder;
-import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.util.Preconditions;
+import com.tchristofferson.querybuilder.UpdateQueryBuilder;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class Tests {
 
     @Test
     public void testSelect() {
         String noDistinctAll = new SelectQueryBuilder(false).toString();
-        Preconditions.condition(noDistinctAll.equals("SELECT *;"), "select (no distinct all) fails");
+        assertEquals("SELECT *;", noDistinctAll);
 
         String distinctAll = new SelectQueryBuilder(true).toString();
-        Preconditions.condition(distinctAll.equals("SELECT DISTINCT *;"), "select (distinct all) fails");
+        assertEquals("SELECT DISTINCT *;", distinctAll);
 
         String selectWithSpecifiedColumns = new SelectQueryBuilder(false, "uuid", "name").toString();
-        Preconditions.condition(selectWithSpecifiedColumns.equals("SELECT uuid, name;"), "select (specified columns) fails");
+        assertEquals("SELECT uuid, name;", selectWithSpecifiedColumns);
     }
 
     @Test
     public void testSelectFrom() {
         String selectAllFromTable = new SelectQueryBuilder(false).from("names").toString();
-        Preconditions.condition(selectAllFromTable.equals("SELECT * FROM names;"), "select all from table fails");
+        assertEquals("SELECT * FROM names;", selectAllFromTable);
 
         String selectAllFromMultipleTables = new SelectQueryBuilder(false).from("table1", "table2").toString();
-        Preconditions.condition(selectAllFromMultipleTables.equals("SELECT * FROM table1, table2;"), "select all from multiple tables fails:");
+        assertEquals("SELECT * FROM table1, table2;", selectAllFromMultipleTables);
     }
 
     @Test
@@ -36,7 +38,7 @@ public class Tests {
                 .is("uuid")
                 .toString();
 
-        Preconditions.condition(sql.equals("SELECT * FROM players WHERE uuid = 'uuid' AND players.uuid = 'uuid';"), "equal test fails");
+        assertEquals("SELECT * FROM players WHERE uuid = 'uuid' AND players.uuid = 'uuid';", sql);
 
         sql = new SelectQueryBuilder(false)
                 .from("players", "money")
@@ -44,7 +46,7 @@ public class Tests {
                 .is("money", "uuid")
                 .toString();
 
-        Preconditions.condition(sql.equals("SELECT * FROM players, money WHERE players.uuid = money.uuid;"), "equal test using columns fails");
+        assertEquals("SELECT * FROM players, money WHERE players.uuid = money.uuid;", sql);
     }
 
     @Test
@@ -55,7 +57,18 @@ public class Tests {
                 .is("uuid-goes-here")
                 .toString();
 
-        Preconditions.condition(sql.equals("DELETE FROM players WHERE uuid = 'uuid-goes-here';"), "Delete fails");
+        assertEquals("DELETE FROM players WHERE uuid = 'uuid-goes-here';", sql);
     }
 
+    @Test
+    public void testUpdate() {
+        String sql = new UpdateQueryBuilder("players")
+                .set("name", "tchristofferson")
+                .set("uuid", "uuid")
+                .where("uuid")
+                    .is(123)
+                .toString();
+
+        assertEquals("UPDATE players SET name = 'tchristofferson', uuid = 'uuid' WHERE uuid = 123;", sql);
+    }
 }
