@@ -72,14 +72,14 @@ public class Tests {
 
     @Test
     public void testCreateTable() {
-        String sql = new CreateTableQueryBuilder("saves")
+        String sql = new CreateTableQueryBuilder(true, "saves")
                 .withColumn("uuid", "varchar(36)")
                 .withColumn("money", "decimal(15, 2)", "NOT NULL")
                 .primaryKey("uuid")
                 .foreignKey("uuid", "players", "uuid")
                 .toString();
 
-        assertEquals("CREATE TABLE saves(uuid varchar(36), money decimal(15, 2) NOT NULL, PRIMARY KEY (uuid), FOREIGN KEY (uuid) REFERENCES players(uuid));", sql);
+        assertEquals("CREATE TABLE IF NOT EXISTS saves(uuid varchar(36), money decimal(15, 2) NOT NULL, PRIMARY KEY (uuid), FOREIGN KEY (uuid) REFERENCES players(uuid));", sql);
     }
 
     @Test

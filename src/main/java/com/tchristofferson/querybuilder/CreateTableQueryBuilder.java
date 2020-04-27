@@ -5,8 +5,8 @@ public class CreateTableQueryBuilder extends QueryBuilder {
     private boolean hasColumns;
     private boolean hasPrimaryKey;
 
-    public CreateTableQueryBuilder(String table) {
-        super(new StringBuilder("CREATE TABLE ").append(table).append('('));
+    public CreateTableQueryBuilder(boolean createIfNotExists, String table) {
+        super(new StringBuilder("CREATE TABLE ").append(createIfNotExists ? "IF NOT EXISTS " : "").append(table).append('('));
         this.hasColumns = false;
         this.hasPrimaryKey = false;
     }
