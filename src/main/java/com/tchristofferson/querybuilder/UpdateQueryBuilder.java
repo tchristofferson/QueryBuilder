@@ -29,7 +29,7 @@ public class UpdateQueryBuilder extends QueryBuilder {
     }
 
     public WhereQueryBuilder where(String column) {
-        return new WhereQueryBuilder(sqlBuilder, column);
+        return new WhereQueryBuilder(sqlBuilder, column, false);
     }
 
     public WhereQueryBuilder where(String table, String column) {

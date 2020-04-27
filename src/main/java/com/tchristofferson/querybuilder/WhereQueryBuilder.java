@@ -9,9 +9,13 @@ import com.tchristofferson.querybuilder.options.WhereOptions;
 //FIXME: Repeating code
 public class WhereQueryBuilder extends QueryBuilder {
 
-    protected WhereQueryBuilder(StringBuilder sqlBuilder, String column) {
+    protected WhereQueryBuilder(StringBuilder sqlBuilder, String column, boolean isCreateTableQuery) {
         super(sqlBuilder);
-        sqlBuilder.append(" WHERE ").append(column);
+
+        if (!isCreateTableQuery)
+            sqlBuilder.append(" WHERE");
+
+        sqlBuilder.append(' ').append(column);
     }
 
     protected WhereQueryBuilder(StringBuilder sqlBuilder, String table, String column) {
@@ -19,6 +23,7 @@ public class WhereQueryBuilder extends QueryBuilder {
         sqlBuilder.append(" WHERE ").append(table).append('.').append(column);
     }
 
+    // Coming from OperatorQueryBuilder
     protected WhereQueryBuilder(StringBuilder sqlBuilder, String column, BooleanOptions option) {
         super(sqlBuilder);
         sqlBuilder.append(' ').append(option).append(' ').append(column);
@@ -33,7 +38,7 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder is(char character) {
-        return is(new String(new char[]{character}));
+        return is(String.valueOf(character));
     }
 
     public OperatorQueryBuilder is(int value) {
@@ -214,11 +219,11 @@ public class WhereQueryBuilder extends QueryBuilder {
     }
 
     public OperatorQueryBuilder like(String value) {
-        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LIKE, value);
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.LIKE, "'" + value + "'");
     }
 
     public OperatorQueryBuilder notLike(String value) {
-        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_LIKE, value);
+        return new OperatorQueryBuilder(sqlBuilder, WhereOptions.NOT_LIKE, "'" + value + "'");
     }
 
     private String getInString(Object[] objects) {
